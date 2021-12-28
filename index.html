@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>API FrontBack</title>
+  </head>
+  <body>
+    <main></main>
+  </body>
+
+  <script>
+    // aqui pegamos os dados de alguma API ou local da nossa aplicação com o fetch
+    // com response o fetch retorna uma promise, por isso usamos o await para esperar a requisição voltar
+    // só que por conta de o await só funcionar no async, então criamos uma função async e dentro dela teremos nossa chamada fetch com await
+    // "No lugar de usarmos os antigos objetos XMLHTTPRequest, podemos usar a API fetch para lidar com requisições HTTP."
+    // para completar ainda usamos o try / catch para tratar os erros ou algo do tipo
+    async function getContent() {
+      try {
+        // aqui buscamos os dados
+        const response = await fetch("http://localhost:4567/");
+        console.log("RESPOSTA");
+        console.log(response);
+
+        // aqui colocamos os dados numa var e pedimos para transformar os dados em json e esperar isso até terminar
+        const data = await response.json();
+        console.log(data);
+        show(data);
+      } catch (error) {
+        console.log("ERRO");
+        console.error(error);
+      }
+    }
+
+    getContent();
+
+    function show(users) {
+      let output = "";
+
+      for (let user of users) {
+        output += `<li> ${user.name} </li>`;
+      }
+
+      document.querySelector("main").innerHTML = output;
+    }
+  </script>
+</html>

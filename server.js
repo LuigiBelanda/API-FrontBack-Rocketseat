@@ -3,11 +3,14 @@
 // npm i nodemon
 // npm i express
 
+const cors = require("cors");
 const express = require("express");
 const app = express();
 
+app.use(cors());
+
 app.get("/", (req, res) => {
-  return res.json({ message: "okay" });
+  return res.json([{ name: "jeff" }, { name: "diego" }]);
 });
 
-app.listen("3000");
+app.listen("4567");
